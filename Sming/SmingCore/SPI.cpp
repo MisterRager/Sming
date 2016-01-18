@@ -17,7 +17,7 @@ SPIClass::SPIClass(uint8_t spiID) : id(spiID)
 	// Only SPI_HSPI tested on hardware for now!
 }
 
-void SPIClass::begin()
+void SPIClass::begin(uint16_t predivider, uint8_t divider)
 {
 	//bit9 of PERIPHS_IO_MUX should be cleared when HSPI clock doesn't equal CPU clock
 	//bit8 of PERIPHS_IO_MUX should be cleared when SPI clock doesn't equal CPU clock
@@ -46,8 +46,6 @@ void SPIClass::begin()
 	// time length HIGHT level = (CPU clock / 10 / 2) ^ -1,
 	// time length LOW level = (CPU clock / 10 / 2) ^ -1
 	// Frequency calculation: 80Mhz / predivider / divider
-	uint16 predivider = 2;	// (1 ... 8192)
-	uint8 divider = 4;		// (1 ... 64)
 	WRITE_PERI_REG(SPI_FLASH_CLOCK(id),
 		(((predivider-1) & SPI_CLKDIV_PRE) << SPI_CLKDIV_PRE_S) |
 		(((divider-1) & SPI_CLKCNT_N) << SPI_CLKCNT_N_S) |
