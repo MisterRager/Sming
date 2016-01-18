@@ -17,7 +17,7 @@ class SPIClass {
 public:
 	SPIClass(uint8_t spiID);
 
-	void begin(uint16_t predivider = 4, uint8_t divider = 4); // Default
+	void begin(uint16_t predivider = 2, uint8_t divider = 4); // Default
 	void end();
 
 	void transfer(uint8_t * data, uint8_t count);
