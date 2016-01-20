@@ -17,6 +17,10 @@ SPIClass::SPIClass(uint8_t spiID) : id(spiID)
 	// Only SPI_HSPI tested on hardware for now!
 }
 
+void SPIClass::begin() {
+  SPIClass::begin(2, 4);
+}
+
 void SPIClass::begin(uint16_t predivider, uint8_t divider)
 {
 	//bit9 of PERIPHS_IO_MUX should be cleared when HSPI clock doesn't equal CPU clock
