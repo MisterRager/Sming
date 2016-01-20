@@ -55,7 +55,7 @@ void SPIClass::begin(uint16_t predivider, uint8_t divider)
     : 1;
 
   divider = (divider > 0) ?
-    ((divider < 64) ?  64 : divider)
+    ((divider < 64) ?  divider : 64)
     : 1;
 
 	WRITE_PERI_REG(SPI_FLASH_CLOCK(id),
