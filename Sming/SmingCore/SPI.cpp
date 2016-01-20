@@ -50,6 +50,14 @@ void SPIClass::begin(uint16_t predivider, uint8_t divider)
 	// time length HIGHT level = (CPU clock / 10 / 2) ^ -1,
 	// time length LOW level = (CPU clock / 10 / 2) ^ -1
 	// Frequency calculation: 80Mhz / predivider / divider
+  predivider = (predivider > 0) ?
+    (predivider < 8192 ? predivider : 8192)
+    : 1;
+
+  divider = (divider > 0) ?
+    ((divider < 64) ?  64 : divider)
+    : 1;
+
 	WRITE_PERI_REG(SPI_FLASH_CLOCK(id),
 		(((predivider-1) & SPI_CLKDIV_PRE) << SPI_CLKDIV_PRE_S) |
 		(((divider-1) & SPI_CLKCNT_N) << SPI_CLKCNT_N_S) |
