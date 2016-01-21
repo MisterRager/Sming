@@ -55,7 +55,7 @@ void SPIClass::begin(uint16_t predivider, uint8_t divider)
 	}
 
 	if (divider < 1 || divider > 64) {
-		SYSTEM_ERROR("SPI DIVIDER [%d] OUT OF BOUNDS [1-8192]", predivider);
+		SYSTEM_ERROR("SPI DIVIDER [%d] OUT OF BOUNDS [1-64]", predivider);
 	}
 
 	WRITE_PERI_REG(SPI_FLASH_CLOCK(id),
